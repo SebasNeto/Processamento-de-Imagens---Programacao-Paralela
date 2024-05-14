@@ -35,12 +35,12 @@ def processarDiretorio(input_dir, output_dir, za, zb, z1, zn):
 
                 caminho_imagem_expandida = os.path.join(output_dir, filename)
                 cv2.imwrite(caminho_imagem_expandida, imagem_expandida)
-                print(f"Tempo de processamento de {filename}: {elapsed_time * 1000:.4f} ms")
+                print(f"Tempo de processamento de {filename}: {elapsed_time * 1000:.2f} ms")
             else:
                 print(f"Erro ao carregar a imagem: {caminho_imagem}")
     return tempos_execucao
 
-def multiplasExecucoes(input_dir, output_dir, za, zb, z1, zn, execucoes=1):
+def multiplasExecucoes(input_dir, output_dir, za, zb, z1, zn, execucoes=20):
     tempos_todas_execucoes = []
     for execucao in range(execucoes):
         print(f"Iniciando execução {execucao + 1}")
@@ -48,26 +48,28 @@ def multiplasExecucoes(input_dir, output_dir, za, zb, z1, zn, execucoes=1):
         tempos_todas_execucoes.extend(tempos_execucao)
         if tempos_execucao:
             media_execucao = sum(tempos_execucao) / len(tempos_execucao)
-            print(f"Média de tempo para a execução {execucao + 1}: {media_execucao:.4f} ms")
+            print(f"Média de tempo para a execução {execucao + 1}: {media_execucao:.2f} ms")
         else:
             print("Nenhuma imagem processada nesta execução.")
 
     if tempos_todas_execucoes:
         media_geral = sum(tempos_todas_execucoes) / len(tempos_todas_execucoes)
-        print(f"Média geral das médias de tempo após {execucoes} execuções: {media_geral:.4f} ms")
+        print(f"Média geral das médias de tempo após {execucoes} execuções: {media_geral:.2f} ms")
     else:
         print("Nenhuma imagem foi processada em nenhuma execução.")
 
 
 za = 100
 zb = 200
-z1 = 50
-zn = 200
-
-
+z1 = 0
+zn = 255
 input_dir = '/mnt/c/Users/Cliente/Downloads/Arquivos_Teste/Teste_Imagens'
 output_dir = '/mnt/c/Users/Cliente/Downloads/Arquivos_Teste/Teste_Imagens_Python'
 
-
 # Chama a função que executa o processamento múltiplas vezes
-media_final = multiplasExecucoes(input_dir, output_dir, za, zb, z1, zn)
+multiplasExecucoes(input_dir, output_dir, za, zb, z1, zn)
+
+
+
+
+

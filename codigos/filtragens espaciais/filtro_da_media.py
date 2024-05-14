@@ -4,15 +4,10 @@ import numpy as np
 def filtro_da_media(imagem, tam_janela=3, T=60):
     
     altura, largura, _ = imagem.shape
-
     imagemFiltrada = np.copy(imagem)
-
     margem = tam_janela // 2
-
     for i in range(margem, altura - margem):
         for j in range(margem, largura - margem):
-            
-            #extraindo regioes/vizinhos
             regiao = imagem[i - margem:i + margem + 1, j - margem:j + margem + 1]
             
             mediaB = np.mean(regiao[:, :, 0])

@@ -33,6 +33,7 @@ def filtro_da_media_V2(imagem, tamJanela=3, T=60):
 
     return imagemFiltrada
 
+########################################################### FILTRO DA MEDIA #######################################################
 def filtro_da_media(imagem, tamJanela=3, T=60):
     
     if len(imagem.shape) == 2:
@@ -63,6 +64,7 @@ def filtro_da_media(imagem, tamJanela=3, T=60):
 
     return imagemFiltrada
 
+########################################################### FILTRO DA MEDIANA #######################################################
 
 def filtro_da_mediana(imagem, tamJanela = 3):
     
@@ -93,6 +95,8 @@ def filtro_da_mediana(imagem, tamJanela = 3):
 
     return imagemFiltrada
 
+
+########################################################### FILTRO DA MODA #######################################################
 def filtro_da_moda(imagem, tamJanela=3):
     
     if len(imagem.shape) == 2:
@@ -123,6 +127,7 @@ def filtro_da_moda(imagem, tamJanela=3):
 import cv2
 import numpy as np
 
+########################################################### FILTRO DOS K VIZINHOS #######################################################
 def filtro_k_vizinhos_proximos(imagem, tamJanela=3, k=3):
     
     if len(imagem.shape) == 2:
@@ -141,33 +146,35 @@ def filtro_k_vizinhos_proximos(imagem, tamJanela=3, k=3):
                 regiao = imagem[i - margem:i + margem + 1, j - margem:j + margem + 1, canal]
                 pixel_central = imagem[i, j, canal]
                 
-                # Calcula as distâncias entre o pixel central e todos os outros pixels na janela
                 distancias = np.abs(regiao - pixel_central)
                 
-                # Pega os índices dos k vizinhos mais próximos na região
-                indices_vizinhos_proximos = np.argsort(distancias, axis=None)[:k] #contem os indices dos k vizinhos em relação ao pixel central
+                indices_vizinhos_proximos = np.argsort(distancias, axis=None)[:k] # indices dos k vizinhos em relação ao pixel central
                 valores_vizinhos_proximos = regiao.flatten()[indices_vizinhos_proximos]
                 
-                # Calcula a média dos k vizinhos mais próximos e substitui o pixel central
-                imagemFiltrada[i, j, canal] = np.mean(valores_vizinhos_proximos)
+                
+                imagemFiltrada[i, j, canal] = np.mean(valores_vizinhos_proximos) # Calcula a média dos k vizinhos mais próximos e substitui o pixel central
 
     if canais == 1:
         imagemFiltrada = imagemFiltrada[:, :, 0]
 
     return imagemFiltrada
 
+########################################################### MAIN #######################################################
 
 def main():
     print("Escolha o filtro: ")
     
     print("1. Filtro da Média")
+    
     print("2. Filtro da Mediana")
+    
     print("3. Filtro da Moda")
+    
     print("4. Filtro dos k vizinhos mais próximos")
     
     escolha = input("Digite o número do filtro: ")
 
-    caminho_imagem = 'codigos\\input_testes_imagens\\input imagens filtragens espaciais\\teste.png'
+    caminho_imagem = 'codigos\\input_testes_imagens\\input imagens filtragens espaciais\\cameraman_snp.png'
     imagem = cv2.imread(caminho_imagem, cv2.IMREAD_COLOR)
 
     if escolha == "1":
@@ -198,6 +205,6 @@ def main():
     
     print("Imagem salva com sucesso")
 
-# Chamando a função main
+
 if __name__ == "__main__":
     main()
