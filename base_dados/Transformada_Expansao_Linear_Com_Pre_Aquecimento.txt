@@ -1,0 +1,103 @@
+Duracao do processamento de 01_Grupo_1071x1368.jpg: 3330 ms
+Duracao do processamento de 01_Grupo_1129x1500.jpg: 266 ms
+Duracao do processamento de 01_Grupo_1178x1573.jpg: 250 ms
+Duracao do processamento de 01_Grupo_1181x1550.jpg: 250 ms
+Duracao do processamento de 01_Grupo_1200x1600.jpg: 258 ms
+Duracao do processamento de 02_Grupo_1341_1419.jpg: 255 ms
+Duracao do processamento de 02_Grupo_1409x1374.jpg: 252 ms
+Duracao do processamento de 02_Grupo_1476x1397.jpg: 260 ms
+Duracao do processamento de 02_Grupo_1515x1495.jpg: 246 ms
+Duracao do processamento de 02_Grupo_1554x1312.jpg: 252 ms
+Duracao do processamento de 03_Grupo_1570x1222.jpg: 252 ms
+Duracao do processamento de 03_Grupo_1574x1104.jpg: 258 ms
+Duracao do processamento de 03_Grupo_1585x1280.jpg: 251 ms
+Duracao do processamento de 03_Grupo_1592x1269.jpg: 251 ms
+Duracao do processamento de 03_Grupo_1600x1161.jpg: 252 ms
+Duracao do processamento de 04_Grupo_2690x3471.jpg: 268 ms
+Duracao do processamento de 04_Grupo_2748x3707.jpg: 262 ms
+Duracao do processamento de 04_Grupo_2892x3871.jpg: 264 ms
+Duracao do processamento de 04_Grupo_2961_4004.jpg: 264 ms
+Duracao do processamento de 04_Grupo_3024x4032.jpg: 264 ms
+Duracao do processamento de 05_Grupo_3094x2780.jpg: 264 ms
+Duracao do processamento de 05_Grupo_3259x2570.jpg: 258 ms
+Duracao do processamento de 05_Grupo_3310x3024.jpg: 261 ms
+Duracao do processamento de 05_Grupo_3471x2742.jpg: 260 ms
+Duracao do processamento de 05_Grupo_3637x2729.jpg: 262 ms
+Duracao do processamento de 06_Grupo_3751x2615.jpg: 269 ms
+Duracao do processamento de 06_Grupo_3780x2814.jpg: 412 ms
+Duracao do processamento de 06_Grupo_3845x2837.jpg: 267 ms
+Duracao do processamento de 06_Grupo_3967x2978.jpg: 269 ms
+Duracao do processamento de 06_Grupo_4032x3024.jpg: 304 ms
+
+Duracao do processamento de 01_Grupo_1071x1368.jpg: 291 ms
+Duracao da execucao para 01_Grupo_1071x1368.jpg: 291.000000 ms
+Duracao do processamento de 01_Grupo_1129x1500.jpg: 275 ms
+Duracao da execucao para 01_Grupo_1129x1500.jpg: 275.000000 ms
+Duracao do processamento de 01_Grupo_1178x1573.jpg: 265 ms
+Duracao da execucao para 01_Grupo_1178x1573.jpg: 265.000000 ms
+Duracao do processamento de 01_Grupo_1181x1550.jpg: 254 ms
+Duracao da execucao para 01_Grupo_1181x1550.jpg: 254.000000 ms
+Duracao do processamento de 01_Grupo_1200x1600.jpg: 262 ms
+Duracao da execucao para 01_Grupo_1200x1600.jpg: 262.000000 ms
+
+Duracao do processamento de 02_Grupo_1341_1419.jpg: 252 ms
+Duracao da execucao para 02_Grupo_1341_1419.jpg: 252.000000 ms
+Duracao do processamento de 02_Grupo_1409x1374.jpg: 250 ms
+Duracao da execucao para 02_Grupo_1409x1374.jpg: 250.000000 ms
+Duracao do processamento de 02_Grupo_1476x1397.jpg: 252 ms
+Duracao da execucao para 02_Grupo_1476x1397.jpg: 252.000000 ms
+Duracao do processamento de 02_Grupo_1515x1495.jpg: 251 ms
+Duracao da execucao para 02_Grupo_1515x1495.jpg: 251.000000 ms
+Duracao do processamento de 02_Grupo_1554x1312.jpg: 252 ms
+Duracao da execucao para 02_Grupo_1554x1312.jpg: 252.000000 ms
+
+Duracao do processamento de 03_Grupo_1570x1222.jpg: 250 ms
+Duracao da execucao para 03_Grupo_1570x1222.jpg: 250.000000 ms
+Duracao do processamento de 03_Grupo_1574x1104.jpg: 250 ms
+Duracao da execucao para 03_Grupo_1574x1104.jpg: 250.000000 ms
+Duracao do processamento de 03_Grupo_1585x1280.jpg: 255 ms
+Duracao da execucao para 03_Grupo_1585x1280.jpg: 255.000000 ms
+Duracao do processamento de 03_Grupo_1592x1269.jpg: 250 ms
+Duracao da execucao para 03_Grupo_1592x1269.jpg: 250.000000 ms
+Duracao do processamento de 03_Grupo_1600x1161.jpg: 253 ms
+Duracao da execucao para 03_Grupo_1600x1161.jpg: 253.000000 ms
+
+Duracao do processamento de 04_Grupo_2690x3471.jpg: 253 ms
+Duracao da execucao para 04_Grupo_2690x3471.jpg: 253.000000 ms
+Duracao do processamento de 04_Grupo_2748x3707.jpg: 261 ms
+Duracao da execucao para 04_Grupo_2748x3707.jpg: 261.000000 ms
+Duracao do processamento de 04_Grupo_2892x3871.jpg: 262 ms
+Duracao da execucao para 04_Grupo_2892x3871.jpg: 262.000000 ms
+Duracao do processamento de 04_Grupo_2961_4004.jpg: 261 ms
+Duracao da execucao para 04_Grupo_2961_4004.jpg: 261.000000 ms
+Duracao do processamento de 04_Grupo_3024x4032.jpg: 265 ms
+Duracao da execucao para 04_Grupo_3024x4032.jpg: 265.000000 ms
+
+Duracao do processamento de 05_Grupo_3094x2780.jpg: 259 ms
+Duracao da execucao para 05_Grupo_3094x2780.jpg: 259.000000 ms
+Duracao do processamento de 05_Grupo_3259x2570.jpg: 254 ms
+Duracao da execucao para 05_Grupo_3259x2570.jpg: 254.000000 ms
+Duracao do processamento de 05_Grupo_3310x3024.jpg: 267 ms
+Duracao da execucao para 05_Grupo_3310x3024.jpg: 267.000000 ms
+Duracao do processamento de 05_Grupo_3471x2742.jpg: 258 ms
+Duracao da execucao para 05_Grupo_3471x2742.jpg: 258.000000 ms
+Duracao do processamento de 05_Grupo_3637x2729.jpg: 261 ms
+Duracao da execucao para 05_Grupo_3637x2729.jpg: 261.000000 ms
+
+Duracao do processamento de 06_Grupo_3751x2615.jpg: 260 ms
+Duracao da execucao para 06_Grupo_3751x2615.jpg: 260.000000 ms
+Duracao do processamento de 06_Grupo_3780x2814.jpg: 274 ms
+Duracao da execucao para 06_Grupo_3780x2814.jpg: 274.000000 ms
+Duracao do processamento de 06_Grupo_3845x2837.jpg: 258 ms
+Duracao da execucao para 06_Grupo_3845x2837.jpg: 258.000000 ms
+Duracao do processamento de 06_Grupo_3967x2978.jpg: 259 ms
+Duracao da execucao para 06_Grupo_3967x2978.jpg: 259.000000 ms
+Duracao do processamento de 06_Grupo_4032x3024.jpg: 258 ms
+Duracao da execucao para 06_Grupo_4032x3024.jpg: 258.000000 ms
+
+Media de tempo para a execucao 1: 257.965515 ms
+Media geral das medias de tempo apos 1 execucoes: 257.965515 ms
+
+O C:\Users\Cliente\source\repos\Halide PIBIC\x64\Release\Halide PIBIC.exe (processo 15584) foi encerrado com o código 0.
+Para fechar o console automaticamente quando a depuração parar, habilite Ferramentas -> Opções -> Depuração -> Fechar o console automaticamente quando a depuração parar.
+Pressione qualquer tecla para fechar esta janela...

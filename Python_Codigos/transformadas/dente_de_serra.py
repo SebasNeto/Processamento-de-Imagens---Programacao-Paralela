@@ -1,11 +1,11 @@
 import cv2
 import numpy as np
-import matplotlib.pyplot as plt
+import os
 import time
 
 def transformada_dente_de_serra(imagem):
-    altura, largura = len(imagem), len(imagem[0])
-    imagem_transformada = [[0 for _ in range(largura)] for _ in range(altura)]
+    altura, largura = imagem.shape
+    imagem_transformada = np.zeros_like(imagem, dtype=np.float32)
     
     for i in range(altura):
         for j in range(largura):
@@ -23,51 +23,47 @@ def transformada_dente_de_serra(imagem):
             else:
                 imagem_transformada[i][j] = int(255 * (pixel - 191) / 64)
 
-    return imagem_transformada
+    return np.clip(imagem_transformada, 0, 255).astype(np.uint8)
 
+def processarDiretorio(input_dir, output_dir):
+    tempos_execucao = []  
+    for filename in os.listdir(input_dir):
+        if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp')):
+            caminho_imagem = os.path.join(input_dir, filename)
+            imagem = cv2.imread(caminho_imagem, cv2.IMREAD_GRAYSCALE)
+            if imagem is not None:
+                start_time = time.time()
+                imagem_transformada = transformada_dente_de_serra(imagem)
+                elapsed_time = time.time() - start_time
+                tempos_execucao.append(elapsed_time * 1000)  # Convertendo para milissegundos
 
-caminho_imagem = '/mnt/c/Users/Cliente/OneDrive/Documentos/PIBIC/processamentoImagens_Codigos/codigos/transformadas/input_imagens/fusca2.png'
-imagem = cv2.imread(caminho_imagem, cv2.IMREAD_GRAYSCALE)
+                caminho_imagem_transformada = os.path.join(output_dir, filename)
+                cv2.imwrite(caminho_imagem_transformada, imagem_transformada)
+                print(f"Tempo de processamento de {filename}: {elapsed_time * 1000:.4f} ms")
+            else:
+                print(f"Erro ao carregar a imagem: {caminho_imagem}")
+    return tempos_execucao
 
-inicio =  time.time()
-imagem_transformada = transformada_dente_de_serra(imagem)
-fim =  time.time()
+def multiplasExecucoes(input_dir, output_dir, execucoes=1):
+    tempos_todas_execucoes = []
+    for execucao in range(execucoes):
+        print(f"Iniciando execução {execucao + 1}")
+        tempos_execucao = processarDiretorio(input_dir, output_dir)
+        tempos_todas_execucoes.extend(tempos_execucao)
+        if tempos_execucao:
+            media_execucao = sum(tempos_execucao) / len(tempos_execucao)
+            print(f"Média de tempo para a execução {execucao + 1}: {media_execucao:.4f} ms")
+        else:
+            print("Nenhuma imagem processada nesta execução.")
 
-#salvar com OpenCV
-#imagem_transformada_array = [[imagem_transformada[i][j] for j in range(len(imagem_transformada[0]))] for i in range(len(imagem_transformada))]
-#imagem_transformada_array = (cv2.UMat.get(imagem_transformada_array)).astype('uint8')
+    if tempos_todas_execucoes:
+        media_geral = sum(tempos_todas_execucoes) / len(tempos_todas_execucoes)
+        print(f"Média geral das médias de tempo após {execucoes} execuções: {media_geral:.4f} ms")
+    else:
+        print("Nenhuma imagem foi processada em nenhuma execução.")
 
-imagem_transformada = np.array(imagem_transformada, dtype=np.uint8)
+input_dir = '/mnt/c/Users/Cliente/Downloads/base_dados/Imagens_Selecionadas'
+output_dir = '/mnt/c/Users/Cliente/Downloads/base_dados/Saida_Python_Dente_de_Serra'
 
-# def mapeamento_dente_de_serra(valor):
-#     if valor < 63:
-#         return int(255 * valor / 62)
-#     elif 63 <= valor < 127:
-#         return int(255 * (valor - 63) / 63)
-#     elif 127 <= valor < 191:
-#         return int(255 * (valor - 127) / 63)
-#     else:
-#         return int(255 * (valor - 191) / 64)
-
-# # Gerando os valores de entrada e saída para o gráfico
-# valores_entrada = list(range(256))
-# valores_saida = [mapeamento_dente_de_serra(valor) for valor in valores_entrada]
-
-# # Plotando o gráfico
-# plt.figure(figsize=(8, 6))
-# plt.plot(valores_entrada, valores_saida, '-r', label='Transformada Dente de Serra')
-# plt.title('Gráfico da Transformada Dente de Serra')
-# plt.xlabel('Nível de Cinza Original')
-# plt.ylabel('Nível de Cinza Transformado')
-# plt.grid(True)
-# plt.legend()
-# plt.show()
-
-# Salva a imagem transformada
-caminho_imagem_transformada = '/mnt/c/Users/Cliente/OneDrive/Documentos/PIBIC/processamentoImagens_Codigos/codigos/transformadas/output_imagens/fusca2_Super.png'
-cv2.imwrite(caminho_imagem_transformada, imagem_transformada)
-tempo_execucao = (fim - inicio) * 1e6
-
-print("Transformação dente de serra aplicada e imagem salva com sucesso!")
-print(f"Tempo de execução: {tempo_execucao} microsegundos")
-
+# Chama a função que executa o processamento múltiplas vezes
+multiplasExecucoes(input_dir, output_dir)

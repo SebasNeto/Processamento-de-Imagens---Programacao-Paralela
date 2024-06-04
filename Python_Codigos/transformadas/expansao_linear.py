@@ -22,7 +22,7 @@ def expansaoLinear(imagem, za, zb, z1, zn):
     return imagem_expandida
 
 def processarDiretorio(input_dir, output_dir, za, zb, z1, zn):
-    tempos_execucao = []  # Lista para armazenar os tempos de processamento individuais
+    tempos_execucao = []  
     for filename in os.listdir(input_dir):
         if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp')):
             caminho_imagem = os.path.join(input_dir, filename)
@@ -65,8 +65,8 @@ z1 = 50
 zn = 200
 
 
-input_dir = '/mnt/c/Users/Cliente/Downloads/Arquivos_Teste/Teste_Imagens'
-output_dir = '/mnt/c/Users/Cliente/Downloads/Arquivos_Teste/Teste_Imagens_Python'
+input_dir = '/mnt/c/Users/Cliente/Downloads/base_dados/Imagens_Selecionadas'
+output_dir = '/mnt/c/Users/Cliente/Downloads/base_dados/Saida_Python'
 
 
 # Chama a função que executa o processamento múltiplas vezes

@@ -1,0 +1,59 @@
+Tempo de processamento de 01_Grupo_1071x1368.jpg: 52498.7590 ms
+Tempo de processamento de 01_Grupo_1129x1500.jpg: 67666.2776 ms
+Tempo de processamento de 01_Grupo_1178x1573.jpg: 64244.9794 ms
+Tempo de processamento de 01_Grupo_1181x1550.jpg: 72440.6385 ms
+Tempo de processamento de 01_Grupo_1200x1600.jpg: 87977.0558 ms
+
+Tempo de processamento de 02_Grupo_1341_1419.jpg: 81940.3505 ms
+Tempo de processamento de 02_Grupo_1409x1374.jpg: 79553.7426 ms
+Tempo de processamento de 02_Grupo_1476x1397.jpg: 77004.5135 ms
+Tempo de processamento de 02_Grupo_1515x1495.jpg: 82446.9514 ms
+Tempo de processamento de 02_Grupo_1554x1312.jpg: 79304.3590 ms
+
+Tempo de processamento de 03_Grupo_1570x1222.jpg: 75451.4709 ms
+Tempo de processamento de 03_Grupo_1574x1104.jpg: 73324.5289 ms
+Tempo de processamento de 03_Grupo_1585x1280.jpg: 78687.8109 ms
+Tempo de processamento de 03_Grupo_1592x1269.jpg: 71212.8937 ms
+Tempo de processamento de 03_Grupo_1600x1161.jpg: 72137.5191 ms
+
+Tempo de processamento de 04_Grupo_2690x3471.jpg: 348077.9374 ms
+Tempo de processamento de 04_Grupo_2748x3707.jpg: 375877.9452 ms
+Tempo de processamento de 04_Grupo_2892x3871.jpg: 416912.6079 ms
+Tempo de processamento de 04_Grupo_2961_4004.jpg: 437861.5687 ms
+Tempo de processamento de 04_Grupo_3024x4032.jpg: 454521.7438 ms
+
+Tempo de processamento de 05_Grupo_3094x2780.jpg: 320570.8170 ms
+Tempo de processamento de 05_Grupo_3259x2570.jpg: 288957.3739 ms
+Tempo de processamento de 05_Grupo_3310x3024.jpg: 347416.7438 ms
+Tempo de processamento de 05_Grupo_3471x2742.jpg: 344605.9887 ms
+Tempo de processamento de 05_Grupo_3637x2729.jpg: 360635.4382 ms
+
+Tempo de processamento de 06_Grupo_3751x2615.jpg: 362357.7685 ms
+Tempo de processamento de 06_Grupo_3780x2814.jpg: 397324.7199 ms
+Tempo de processamento de 06_Grupo_3845x2837.jpg: 399907.1124 ms
+Tempo de processamento de 06_Grupo_3967x2978.jpg: 437082.5479 ms
+Tempo de processamento de 06_Grupo_4032x3024.jpg: 447047.3912 ms
+
+Média de tempo para a execução 1: 228501.6518 ms
+
+Média geral das médias de tempo após 1 execuções: 228501.6518 ms
+
+
+############################# Valores em Milissegundos #############################
+Média: 228501.6518 ms
+Variância: 24932889738.8834 ms²
+Desvio Padrão: 157901.5191 ms
+Tempo de execução em Python: 228501.6518 ms
+Tempo de execução em Halide: 595.3333 ms
+Ganho em tempo absoluto: 227906.3185 ms
+Ganho percentual para Halide: 99.74 %
+Ganho percentual para Python: 0.26 %
+############################# Valores em Microssegundos #############################
+Média: 228501651.8433 µs
+Variância: 24932889738883408.0000 µs²
+Desvio Padrão: 157901519.1152 µs
+Tempo de execução em Python: 228501651.8000 µs
+Tempo de execução em Halide: 595333.3000 µs
+Ganho em tempo absoluto: 227906318.5000 µs
+Ganho percentual para Halide: 99.74 %
+Ganho percentual para Python: 0.26 %

@@ -1,0 +1,33 @@
+Iniciando execução 1
+Tempo de processamento de 01_Grupo_1071x1368.jpg: 111366.6956 ms
+Tempo de processamento de 01_Grupo_1129x1500.jpg: 128205.8187 ms
+Tempo de processamento de 01_Grupo_1178x1573.jpg: 148235.9369 ms
+Tempo de processamento de 01_Grupo_1181x1550.jpg: 137888.2310 ms
+Tempo de processamento de 01_Grupo_1200x1600.jpg: 143229.9368 ms
+Tempo de processamento de 02_Grupo_1341_1419.jpg: 140730.0651 ms
+Tempo de processamento de 02_Grupo_1409x1374.jpg: 146578.7878 ms
+Tempo de processamento de 02_Grupo_1476x1397.jpg: 157879.6518 ms
+Tempo de processamento de 02_Grupo_1515x1495.jpg: 183396.4670 ms
+Tempo de processamento de 02_Grupo_1554x1312.jpg: 160236.3367 ms
+Tempo de processamento de 03_Grupo_1570x1222.jpg: 140644.8154 ms
+Tempo de processamento de 03_Grupo_1574x1104.jpg: 128141.0894 ms
+Tempo de processamento de 03_Grupo_1585x1280.jpg: 147683.3181 ms
+Tempo de processamento de 03_Grupo_1592x1269.jpg: 146685.4308 ms
+Tempo de processamento de 03_Grupo_1600x1161.jpg: 213788.9361 ms
+Tempo de processamento de 04_Grupo_2690x3471.jpg: 885054.6401 ms
+Tempo de processamento de 04_Grupo_2748x3707.jpg: 788983.9408 ms
+Tempo de processamento de 04_Grupo_2892x3871.jpg: 813817.4214 ms
+Tempo de processamento de 04_Grupo_2961_4004.jpg: 867299.2282 ms
+Tempo de processamento de 04_Grupo_3024x4032.jpg: 887684.0489 ms
+Tempo de processamento de 05_Grupo_3094x2780.jpg: 582042.2080 ms
+Tempo de processamento de 05_Grupo_3259x2570.jpg: 597151.4843 ms
+Tempo de processamento de 05_Grupo_3310x3024.jpg: 736091.0437 ms
+Tempo de processamento de 05_Grupo_3471x2742.jpg: 689499.2697 ms
+Tempo de processamento de 05_Grupo_3637x2729.jpg: 744009.5477 ms
+Tempo de processamento de 06_Grupo_3751x2615.jpg: 708994.8254 ms
+Tempo de processamento de 06_Grupo_3780x2814.jpg: 774771.8039 ms
+Tempo de processamento de 06_Grupo_3845x2837.jpg: 790834.7080 ms
+Tempo de processamento de 06_Grupo_3967x2978.jpg: 852330.3392 ms
+Tempo de processamento de 06_Grupo_4032x3024.jpg: 866262.6495 ms
+Média de tempo para a execução 1: 460650.6225 ms
+Média geral das médias de tempo após 1 execuções: 460650.6225 ms
