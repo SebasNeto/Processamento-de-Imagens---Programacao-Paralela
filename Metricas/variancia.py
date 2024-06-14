@@ -1,70 +1,44 @@
 import numpy as np
 
-# Dados fornecidos 
-tempos_execucao = [
-    141207.1157, 162064.4724, 184849.5958, 172449.5475, 188662.1773,
-    181624.5449, 190776.5410, 199876.7972, 213743.5622, 219104.5542,
-    188186.9497, 166494.4801, 201141.2179, 192801.9273, 186668.8123,
-    914530.8723, 968041.2948, 1018601.7921, 1117678.1747, 1148956.8503,
-    809409.1678, 803760.8793, 937911.6552, 897168.6590, 896057.9474,
-    912060.0393, 997359.1485, 1127019.4790, 1121780.9086, 1151978.2617
+# Tempos de execução em Halide (ms)
+halide_times = [
+    339.0000, 311.0000, 295.0000, 325.0000, 319.0000,
+    296.0000, 302.0000, 354.0000, 308.0000, 256.0000,
+    348.0000, 251.0000, 257.0000, 261.0000, 282.0000,
+    257.0000, 258.0000, 279.0000, 260.0000, 262.0000,
+    272.0000, 269.0000, 265.0000, 297.0000, 270.0000,
+    282.0000, 295.0000, 300.0000, 295.0000, 296.0000
 ]
 
+# Tempos de execução em Python (ms)
+python_times = [
+    7445.4596 , 7793.6611 ,11314.2622 , 8870.6107 , 13369.8478 ,  # Grupo I
+    10722.0287 , 9980.2921 , 10383.7144 , 16932.3351 , 20748.3628 ,  # Grupo II
+    24908.2062, 42765.8238, 34485.6250, 19169.5409, 32175.8008,  # Grupo III
+    49719.0969, 72016.3686, 65860.1713, 38848.0940, 64922.0078,  # Grupo IV
+    40929.5595, 47252.0275, 74262.8911, 103217.0148, 125244.2317,  # Grupo V
+    64523.3657, 67699.3787, 73130.7538, 95603.4956, 184184.8819  # Grupo VI
+]
 
-# Calculando a média
-media = np.mean(tempos_execucao)
+# Cálculos para Halide
+halide_mean = np.mean(halide_times)
+halide_variance = np.var(halide_times)
+halide_std_dev = np.std(halide_times)
 
-# Calculando a variância
-variancia = np.var(tempos_execucao)
+# Cálculos para Python
+python_mean = np.mean(python_times)
+python_variance = np.var(python_times)
+python_std_dev = np.std(python_times)
 
-# Calculando o desvio padrão
-desvio_padrao = np.std(tempos_execucao)
+# Ganho percentual
+gain_percentage = python_mean/halide_mean
 
-
-# Convertendo para microssegundos (1 ms = 1000 microssegundos)
-media_us = media * 1000
-variancia_us = variancia * (1000**2)
-desvio_padrao_us = desvio_padrao * 1000
-
-# Tempos de execução
-tempo_python = 587065.5808  # ms
-tempo_halide = 1449.7333 # ms
-
-# Calcular o ganho de tempo absoluto
-ganho_ms = tempo_python - tempo_halide
-
-# Calcular o ganho percentual para Halide
-ganho_percentual_halide_ms = (ganho_ms / tempo_python) * 100
-ganho_percentual_python_ms = 100 - ganho_percentual_halide_ms
-
-# Convertendo tempos para microssegundos
-tempo_python_us = tempo_python * 1000
-tempo_halide_us = tempo_halide * 1000
-ganho_us = ganho_ms * 1000
-
-# Calcular o ganho percentual em microssegundos
-ganho_percentual_halide_us = (ganho_us / tempo_python_us) * 100
-ganho_percentual_python_us = 100 - ganho_percentual_halide_us
-
-print ("############################# Valores em Milissegundos #############################")
-print(f"Média: {media:.4f} ms")
-print(f"Variância: {variancia:.4f} ms²")
-print(f"Desvio Padrão: {desvio_padrao:.4f} ms")
-
-print(f"Tempo de execução em Python: {tempo_python:.4f} ms")
-print(f"Tempo de execução em Halide: {tempo_halide:.4f} ms")
-print(f"Ganho em tempo absoluto: {ganho_ms:.4f} ms")
-print(f"Ganho percentual para Halide: {ganho_percentual_halide_ms:.2f} %")
-print(f"Ganho percentual para Python: {ganho_percentual_python_ms:.2f} %")
-
-print ("############################# Valores em Microssegundos #############################")
-print(f"Média: {media_us:.4f} µs")
-print(f"Variância: {variancia_us:.4f} µs²")
-print(f"Desvio Padrão: {desvio_padrao_us:.4f} µs")
-
-print(f"Tempo de execução em Python: {tempo_python_us:.4f} µs")
-print(f"Tempo de execução em Halide: {tempo_halide_us:.4f} µs")
-print(f"Ganho em tempo absoluto: {ganho_us:.4f} µs")
-print(f"Ganho percentual para Halide: {ganho_percentual_halide_us:.2f} %")
-print(f"Ganho percentual para Python: {ganho_percentual_python_us:.2f} %")
-
+print("Média Halide (ms): {:.4f}".format(halide_mean))
+print("Variância Halide (ms²): {:.4f}".format(halide_variance))
+print("Desvio Padrão Halide (ms): {:.4f}".format(halide_std_dev))
+print()
+print("Média Python (ms): {:.4f}".format(python_mean))
+print("Variância Python (ms²): {:.4f}".format(python_variance))
+print("Desvio Padrão Python (ms): {:.4f}".format(python_std_dev))
+print()
+print("Ganho Percentual (%): {:.4f}".format(gain_percentage))

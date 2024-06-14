@@ -59,5 +59,6 @@
     "*.py": "python",
     "vector": "cpp",
     "string": "cpp"
-  }
+  },
+  "C_Cpp.errorSquiggles": "disabled"
 }
