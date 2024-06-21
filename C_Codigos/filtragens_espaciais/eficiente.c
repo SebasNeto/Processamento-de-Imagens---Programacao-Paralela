@@ -3,36 +3,57 @@
 #include <dirent.h>
 #include <string.h>
 #include <time.h>
+#include <math.h>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
 
-// Função de expansão linear com operações desnecessárias
-void expansaoLinear(unsigned char *imagem, int largura, int altura, int za, int zb, int z1, int zn, unsigned char *imagem_expandida) {
-    double a = (double)(zn - z1) / (zb - za);
-    double b = z1 - a * za;
+// Função para comparação de pares para a função qsort
+int compare(const void *a, const void *b) {
+    return (*(int*)a - *(int*)b);
+}
 
-    for (int i = 0; i < altura; ++i) {
-        for (int j = 0; j < largura; ++j) {
-            // Operações desnecessárias
-            for (int k = 0; k < 10; k++) {
-                int pixel = imagem[i * largura + j];
-                if (pixel <= za) {
-                    imagem_expandida[i * largura + j] = z1;
-                } else if (pixel >= zb) {
-                    imagem_expandida[i * largura + j] = zn;
-                } else {
-                    imagem_expandida[i * largura + j] = (unsigned char)(a * pixel + b);
+void filtroKVizinhosProximos(unsigned char *imagem, int largura, int altura, int canais, int tamJanela, int k, unsigned char *imagemFiltrada) {
+    int margem = tamJanela / 2;
+    int tamJanelaQuadrado = tamJanela * tamJanela;
+
+    for (int i = margem; i < altura - margem; ++i) {
+        for (int j = margem; j < largura - margem; ++j) {
+            for (int canal = 0; canal < canais; ++canal) {
+                int pixelIndex = (i * largura + j) * canais + canal;
+                unsigned char pixelCentral = imagem[pixelIndex];
+                int distancias[tamJanelaQuadrado];
+                int valoresVizinhos[tamJanelaQuadrado];
+                int count = 0;
+
+                for (int ki = -margem; ki <= margem; ++ki) {
+                    for (int kj = -margem; kj <= margem; ++kj) {
+                        int vizinhoIndex = ((i + ki) * largura + (j + kj)) * canais + canal;
+                        unsigned char vizinho = imagem[vizinhoIndex];
+                        distancias[count] = abs(vizinho - pixelCentral);
+                        valoresVizinhos[count] = vizinho;
+                        count++;
+                    }
                 }
+
+                // Ordena as distâncias e valores
+                qsort(distancias, tamJanelaQuadrado, sizeof(int), compare);
+                qsort(valoresVizinhos, tamJanelaQuadrado, sizeof(int), compare);
+
+                // Calcula a média dos k vizinhos mais próximos
+                int soma = 0;
+                for (int m = 0; m < k; ++m) {
+                    soma += valoresVizinhos[m];
+                }
+                imagemFiltrada[pixelIndex] = soma / k;
             }
         }
     }
 }
 
-// Processar diretório de forma menos eficiente
-void processarDiretorio(const char *input_dir, const char *output_dir, int za, int zb, int z1, int zn, double *tempos_execucao, int *contador) {
+void processarDiretorio(const char *input_dir, const char *output_dir, int tamJanela, int k, double *tempos_execucao, int *contador) {
     DIR *dir;
     struct dirent *ent;
 
@@ -45,15 +66,12 @@ void processarDiretorio(const char *input_dir, const char *output_dir, int za, i
                     snprintf(caminho_imagem, sizeof(caminho_imagem), "%s/%s", input_dir, ent->d_name);
 
                     int largura, altura, canais;
-                    unsigned char *imagem = stbi_load(caminho_imagem, &largura, &altura, &canais, 1);
+                    unsigned char *imagem = stbi_load(caminho_imagem, &largura, &altura, &canais, 0);
                     if (imagem) {
-                        unsigned char *imagem_expandida = (unsigned char *)malloc(largura * altura);
-
-                        // Operação desnecessária antes de iniciar o cronômetro
-                        for (int k = 0; k < 1000000; k++) {}
+                        unsigned char *imagemFiltrada = (unsigned char *)malloc(largura * altura * canais);
 
                         clock_t start_time = clock();
-                        expansaoLinear(imagem, largura, altura, za, zb, z1, zn, imagem_expandida);
+                        filtroKVizinhosProximos(imagem, largura, altura, canais, tamJanela, k, imagemFiltrada);
                         clock_t end_time = clock();
 
                         double elapsed_time = ((double)(end_time - start_time)) / CLOCKS_PER_SEC * 1000;  // Convertendo para milissegundos
@@ -61,14 +79,14 @@ void processarDiretorio(const char *input_dir, const char *output_dir, int za, i
                         tempos_execucao[*contador] = elapsed_time;
                         (*contador)++;
 
-                        char caminho_imagem_expandida[512];
-                        snprintf(caminho_imagem_expandida, sizeof(caminho_imagem_expandida), "%s/%s", output_dir, ent->d_name);
-                        stbi_write_png(caminho_imagem_expandida, largura, altura, 1, imagem_expandida, largura);
+                        char caminho_imagem_filtrada[512];
+                        snprintf(caminho_imagem_filtrada, sizeof(caminho_imagem_filtrada), "%s/%s", output_dir, ent->d_name);
+                        stbi_write_png(caminho_imagem_filtrada, largura, altura, canais, imagemFiltrada, largura * canais);
 
                         printf("Tempo de processamento de %s: %.4f ms\n", ent->d_name, elapsed_time);
 
                         stbi_image_free(imagem);
-                        free(imagem_expandida);
+                        free(imagemFiltrada);
                     } else {
                         printf("Erro ao carregar a imagem: %s\n", caminho_imagem);
                     }
@@ -81,14 +99,13 @@ void processarDiretorio(const char *input_dir, const char *output_dir, int za, i
     }
 }
 
-// Função principal que realiza múltiplas execuções de forma menos eficiente
-void multiplasExecucoes(const char *input_dir, const char *output_dir, int za, int zb, int z1, int zn, int execucoes, int pre_treino) {
+void multiplasExecucoes(const char *input_dir, const char *output_dir, int tamJanela, int k, int execucoes, int pre_treino) {
     // Pré-treino
     for (int pre_execucao = 0; pre_execucao < pre_treino; ++pre_execucao) {
         printf("Iniciando pré-treino %d\n", pre_execucao + 1);
         double tempos_execucao[1000];
         int contador = 0;
-        processarDiretorio(input_dir, output_dir, za, zb, z1, zn, tempos_execucao, &contador);
+        processarDiretorio(input_dir, output_dir, tamJanela, k, tempos_execucao, &contador);
     }
 
     // Testes principais
@@ -98,7 +115,7 @@ void multiplasExecucoes(const char *input_dir, const char *output_dir, int za, i
         printf("Iniciando execução %d\n", execucao + 1);
         double tempos_execucao[1000];
         int contador = 0;
-        processarDiretorio(input_dir, output_dir, za, zb, z1, zn, tempos_execucao, &contador);
+        processarDiretorio(input_dir, output_dir, tamJanela, k, tempos_execucao, &contador);
         for (int i = 0; i < contador; ++i) {
             tempos_todas_execucoes[contador_total++] = tempos_execucao[i];
         }
@@ -127,15 +144,13 @@ void multiplasExecucoes(const char *input_dir, const char *output_dir, int za, i
 }
 
 int main() {
-    int za = 100;
-    int zb = 200;
-    int z1 = 50;
-    int zn = 200;
+    int tamJanela = 3;
+    int k = 3;
 
     const char *input_dir = "/mnt/c/Users/Cliente/Downloads/base_dados/Imagens_Selecionadas";
-    const char *output_dir = "/mnt/c/Users/Cliente/Downloads/base_dados/Saida_Python_Exp_Comp";
+    const char *output_dir = "/mnt/c/Users/Cliente/Downloads/base_dados/Saida_Python_Filtro_KNN";
 
-    multiplasExecucoes(input_dir, output_dir, za, zb, z1, zn, 1, 1);
+    multiplasExecucoes(input_dir, output_dir, tamJanela, k, 1, 1);
 
     return 0;
 }

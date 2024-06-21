@@ -9,29 +9,26 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
 
-// Função de expansão linear com operações desnecessárias
+// Função de expansão linear otimizada
 void expansaoLinear(unsigned char *imagem, int largura, int altura, int za, int zb, int z1, int zn, unsigned char *imagem_expandida) {
     double a = (double)(zn - z1) / (zb - za);
     double b = z1 - a * za;
 
     for (int i = 0; i < altura; ++i) {
         for (int j = 0; j < largura; ++j) {
-            // Operações desnecessárias
-            for (int k = 0; k < 10; k++) {
-                int pixel = imagem[i * largura + j];
-                if (pixel <= za) {
-                    imagem_expandida[i * largura + j] = z1;
-                } else if (pixel >= zb) {
-                    imagem_expandida[i * largura + j] = zn;
-                } else {
-                    imagem_expandida[i * largura + j] = (unsigned char)(a * pixel + b);
-                }
+            int pixel = imagem[i * largura + j];
+            if (pixel <= za) {
+                imagem_expandida[i * largura + j] = z1;
+            } else if (pixel >= zb) {
+                imagem_expandida[i * largura + j] = zn;
+            } else {
+                imagem_expandida[i * largura + j] = (unsigned char)(a * pixel + b);
             }
         }
     }
 }
 
-// Processar diretório de forma menos eficiente
+// Processar diretório de forma otimizada
 void processarDiretorio(const char *input_dir, const char *output_dir, int za, int zb, int z1, int zn, double *tempos_execucao, int *contador) {
     DIR *dir;
     struct dirent *ent;
@@ -48,9 +45,6 @@ void processarDiretorio(const char *input_dir, const char *output_dir, int za, i
                     unsigned char *imagem = stbi_load(caminho_imagem, &largura, &altura, &canais, 1);
                     if (imagem) {
                         unsigned char *imagem_expandida = (unsigned char *)malloc(largura * altura);
-
-                        // Operação desnecessária antes de iniciar o cronômetro
-                        for (int k = 0; k < 1000000; k++) {}
 
                         clock_t start_time = clock();
                         expansaoLinear(imagem, largura, altura, za, zb, z1, zn, imagem_expandida);
@@ -81,7 +75,7 @@ void processarDiretorio(const char *input_dir, const char *output_dir, int za, i
     }
 }
 
-// Função principal que realiza múltiplas execuções de forma menos eficiente
+// Função principal que realiza múltiplas execuções de forma otimizada
 void multiplasExecucoes(const char *input_dir, const char *output_dir, int za, int zb, int z1, int zn, int execucoes, int pre_treino) {
     // Pré-treino
     for (int pre_execucao = 0; pre_execucao < pre_treino; ++pre_execucao) {
