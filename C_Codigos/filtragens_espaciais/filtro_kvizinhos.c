@@ -5,45 +5,56 @@
 #include <time.h>
 #include <dirent.h>
 #include <opencv2/opencv.hpp>
+#include <vector>
 #include <algorithm>
 #include <numeric>
+
 using namespace cv;
 
-void filtro_sobel(Mat imagem, Mat& imagemFiltrada) {
+void filtro_k_vizinhos_proximos(Mat imagem, Mat& imagemFiltrada, int tamJanela, int k) {
     int altura = imagem.rows;
     int largura = imagem.cols;
     int canais = imagem.channels();
 
-    float Gx[3][3] = {{-1, 0, 1}, {-2, 0, 2}, {-1, 0, 1}};
-    float Gy[3][3] = {{-1, -2, -1}, {0, 0, 0}, {1, 2, 1}};
+    imagemFiltrada = imagem.clone();
+    int margem = tamJanela / 2;
 
-    imagemFiltrada = Mat::zeros(altura, largura, CV_32FC(canais));
-
-    for (int canal = 0; canal < canais; canal++) {
-        for (int i = 1; i < altura - 1; i++) {
-            for (int j = 1; j < largura - 1; j++) {
-                float gx = 0.0, gy = 0.0;
-
-                for (int x = -1; x <= 1; x++) {
-                    for (int y = -1; y <= 1; y++) {
-                        int pixel = imagem.at<Vec3b>(i + x, j + y)[canal];
-                        gx += Gx[x + 1][y + 1] * pixel;
-                        gy += Gy[x + 1][y + 1] * pixel;
+    for (int i = margem; i < altura - margem; i++) {
+        for (int j = margem; j < largura - margem; j++) {
+            for (int canal = 0; canal < canais; canal++) {
+                std::vector<int> vizinhos;
+                
+                for (int x = -margem; x <= margem; x++) {
+                    for (int y = -margem; y <= margem; y++) {
+                        int pixel_vizinho = imagem.at<Vec3b>(i + x, j + y)[canal];
+                        vizinhos.push_back(pixel_vizinho);
                     }
                 }
+                
+                int pixel_central = imagem.at<Vec3b>(i, j)[canal];
+                std::vector<int> distancias;
+                for (int vizinho : vizinhos) {
+                    distancias.push_back(abs(vizinho - pixel_central));
+                }
 
-                float gradiente = sqrt(gx * gx + gy * gy);
-                imagemFiltrada.at<Vec3f>(i, j)[canal] = gradiente;
+                std::vector<size_t> indices_vizinhos_proximos(distancias.size());
+                iota(indices_vizinhos_proximos.begin(), indices_vizinhos_proximos.end(), 0);
+
+                std::partial_sort(indices_vizinhos_proximos.begin(), indices_vizinhos_proximos.begin() + k, indices_vizinhos_proximos.end(), 
+                    [&distancias](size_t a, size_t b) { return distancias[a] < distancias[b]; });
+
+                int soma_vizinhos = 0;
+                for (int n = 0; n < k; n++) {
+                    soma_vizinhos += vizinhos[indices_vizinhos_proximos[n]];
+                }
+
+                imagemFiltrada.at<Vec3b>(i, j)[canal] = soma_vizinhos / k;
             }
         }
     }
-
-    double minVal, maxVal;
-    minMaxLoc(imagemFiltrada, &minVal, &maxVal);
-    imagemFiltrada.convertTo(imagemFiltrada, CV_8UC(canais), 255.0 / maxVal);
 }
 
-void processarDiretorio(const char* input_dir, const char* output_dir, std::vector<double>& tempos_execucao) {
+void processarDiretorio(const char* input_dir, const char* output_dir, std::vector<double>& tempos_execucao, int tamJanela, int k) {
     DIR *dir;
     struct dirent *ent;
     if ((dir = opendir(input_dir)) != NULL) {
@@ -56,7 +67,7 @@ void processarDiretorio(const char* input_dir, const char* output_dir, std::vect
                 if (!imagem.empty()) {
                     Mat imagemFiltrada;
                     clock_t start_time = clock();
-                    filtro_sobel(imagem, imagemFiltrada);
+                    filtro_k_vizinhos_proximos(imagem, imagemFiltrada, tamJanela, k);
                     clock_t end_time = clock();
                     double elapsed_time = (double)(end_time - start_time) * 1000.0 / CLOCKS_PER_SEC;
                     tempos_execucao.push_back(elapsed_time);
@@ -77,12 +88,12 @@ void processarDiretorio(const char* input_dir, const char* output_dir, std::vect
     }
 }
 
-void multiplasExecucoes(const char* input_dir, const char* output_dir, int execucoes) {
+void multiplasExecucoes(const char* input_dir, const char* output_dir, int tamJanela, int k, int execucoes) {
     std::vector<double> tempos_todas_execucoes;
     for (int execucao = 0; execucao < execucoes; execucao++) {
         printf("Iniciando execução %d\n", execucao + 1);
         std::vector<double> tempos_execucao;
-        processarDiretorio(input_dir, output_dir, tempos_execucao);
+        processarDiretorio(input_dir, output_dir, tempos_execucao, tamJanela, k);
         tempos_todas_execucoes.insert(tempos_todas_execucoes.end(), tempos_execucao.begin(), tempos_execucao.end());
 
         if (!tempos_execucao.empty()) {
@@ -103,10 +114,9 @@ void multiplasExecucoes(const char* input_dir, const char* output_dir, int execu
 
 int main() {
     const char* input_dir = "/mnt/c/Users/Cliente/Downloads/base_dados/Imagens_Selecionadas";
-    const char* output_dir = "/mnt/c/Users/Cliente/Downloads/base_dados/Saida_C_Sobel";
-    
-    multiplasExecucoes(input_dir, output_dir, 1);
+    const char* output_dir = "/mnt/c/Users/Cliente/Downloads/base_dados/Saida_C_Filtro_KNN";
+
+    multiplasExecucoes(input_dir, output_dir, 3, 3, 1);
 
     return 0;
 }
-

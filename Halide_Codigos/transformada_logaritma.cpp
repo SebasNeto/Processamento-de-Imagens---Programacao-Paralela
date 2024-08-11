@@ -1,11 +1,20 @@
 //transformada do logaritmo com pré compilação
 
-#include "cabecalhosHalide.h"
 #include <vector>
 #include <string>
 #include <filesystem>
 #include <numeric>
 #include <chrono>
+
+#include "Halide.h"
+#include "halide_image_io.h"
+#include <stdio.h>
+#include <chrono>
+
+using namespace Halide;
+using namespace Halide::Tools;
+using namespace std::chrono;
+namespace fs = std::filesystem;
 
 namespace fs = std::filesystem;
 
@@ -37,13 +46,13 @@ float processImage(const std::string& inputPath, const std::string& outputPath) 
 
     auto duracao_processamento = std::chrono::duration_cast<std::chrono::milliseconds>(fim - inicio).count();
     std::string fileName = fs::path(inputPath).filename().string();
-    printf("Duracao do processamento de %s: %lld ms\n", fileName.c_str(), duracao_processamento);
+    printf("Duracao do processamento de %s: %ld ms\n", fileName.c_str(), duracao_processamento);
     return static_cast<float>(duracao_processamento);
 }
 
 int main(int argc, char** argv) {
-    std::string inputDir = "C:\\Users\\Cliente\\Downloads\\base_dados\\Imagens_Selecionadas";
-    std::string outputDir = "C:\\Users\\Cliente\\Downloads\\base_dados\\Saida_Halide_Logaritmo";
+    std::string inputDir = "/mnt/c/Users/Cliente/Downloads/base_dados/Imagens_Selecionadas";
+    std::string outputDir = "/mnt/c/Users/Cliente/Downloads/base_dados/Saida_Python_Logaritmo";
 
     std::vector<float> mediasGerais;
 

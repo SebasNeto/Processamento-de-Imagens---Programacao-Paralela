@@ -1,11 +1,20 @@
 //transformada expansão linear com pré compilação
 
-#include "cabecalhosHalide.h"
 #include <vector>
 #include <string>
 #include <filesystem>
 #include <numeric>
 #include <chrono>
+
+#include "Halide.h"
+#include "halide_image_io.h"
+#include <stdio.h>
+#include <chrono>
+
+using namespace Halide;
+using namespace Halide::Tools;
+using namespace std::chrono;
+namespace fs = std::filesystem;
 
 namespace fs = std::filesystem;
 
@@ -48,19 +57,19 @@ float processImage(const std::string& inputPath, const std::string& outputPath) 
 
     std::string fileName = fs::path(inputPath).filename().string();
     //printf("Duracao do carregamento de %s: %lld ms\n", fileName.c_str(), duracao_carregamento);
-    printf("Duracao do processamento de %s: %lld ms\n", fileName.c_str(), duracao_processamento);
+    printf("Duracao do processamento de %s: %ld ms\n", fileName.c_str(), duracao_processamento);
     //printf("Duracao total de %s: %lld ms\n", fileName.c_str(), duracao_total);
     return static_cast<float>(duracao_processamento);
 }
 
 int main(int argc, char** argv) {
-    std::string inputDir = "C:\\Users\\Cliente\\Downloads\\base_dados\\Imagens_Selecionadas";
-    std::string outputDir = "C:\\Users\\Cliente\\Downloads\\base_dados\\Saida_Halide_Expansao_Contraste";
+    std::string inputDir = "/mnt/c/Users/Cliente/Downloads/base_dados/Imagens_Selecionadas";
+    std::string outputDir = "/mnt/c/Users/Cliente/Downloads/base_dados/Saida_Python_Expansao_Contraste";
 
     std::vector<float> mediasGerais;
 
     // Pré-aquecimento
-    for (int i = 0; i < 0; i++) {
+    for (int i = 0; i < 1; i++) {
         for (const auto& entry : fs::directory_iterator(inputDir)) {
             std::string inputPath = entry.path().string();
             std::string outputPath = outputDir + "\\" + entry.path().filename().string();

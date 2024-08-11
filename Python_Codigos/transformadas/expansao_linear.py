@@ -40,12 +40,8 @@ def processarDiretorio(input_dir, output_dir, za, zb, z1, zn):
                 print(f"Erro ao carregar a imagem: {caminho_imagem}")
     return tempos_execucao
 
-def multiplasExecucoes(input_dir, output_dir, za, zb, z1, zn, execucoes=1, pre_treino=1):
-    # Pré-treino
-    for pre_execucao in range(pre_treino):
-        print(f"Iniciando pré-treino {pre_execucao + 1}")
-        processarDiretorio(input_dir, output_dir, za, zb, z1, zn)
-    
+def multiplasExecucoes(input_dir, output_dir, za, zb, z1, zn, execucoes=1):
+
     # Testes principais
     tempos_todas_execucoes = []
     for execucao in range(execucoes):
@@ -66,11 +62,11 @@ def multiplasExecucoes(input_dir, output_dir, za, zb, z1, zn, execucoes=1, pre_t
 
 za = 100
 zb = 200
-z1 = 50
-zn = 200
+z1 = 30
+zn = 150
 
 input_dir = '/mnt/c/Users/Cliente/Downloads/base_dados/Imagens_Selecionadas'
 output_dir = '/mnt/c/Users/Cliente/Downloads/base_dados/Saida_Python_Exp_Comp'
 
 # Chama a função que executa o processamento múltiplas vezes com pré-treino
-multiplasExecucoes(input_dir, output_dir, za, zb, z1, zn, execucoes=1, pre_treino=1)
+multiplasExecucoes(input_dir, output_dir, za, zb, z1, zn, execucoes=1)

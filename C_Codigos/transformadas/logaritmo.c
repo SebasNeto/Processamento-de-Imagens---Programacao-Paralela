@@ -1,46 +1,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
 #include <time.h>
 #include <dirent.h>
 #include <opencv2/opencv.hpp>
+#include <cmath>
 #include <algorithm>
 #include <numeric>
+
 using namespace cv;
 
-void filtro_sobel(Mat imagem, Mat& imagemFiltrada) {
+void escalaLogaritma(Mat imagem, Mat& imagemTransformada) {
     int altura = imagem.rows;
     int largura = imagem.cols;
-    int canais = imagem.channels();
+    
+    imagemTransformada = Mat::zeros(altura, largura, CV_32F);
+    
+    float c = 255.0 / log(1 + 255.0);  // Calcula o coeficiente baseado no valor máximo de pixel (255)
 
-    float Gx[3][3] = {{-1, 0, 1}, {-2, 0, 2}, {-1, 0, 1}};
-    float Gy[3][3] = {{-1, -2, -1}, {0, 0, 0}, {1, 2, 1}};
-
-    imagemFiltrada = Mat::zeros(altura, largura, CV_32FC(canais));
-
-    for (int canal = 0; canal < canais; canal++) {
-        for (int i = 1; i < altura - 1; i++) {
-            for (int j = 1; j < largura - 1; j++) {
-                float gx = 0.0, gy = 0.0;
-
-                for (int x = -1; x <= 1; x++) {
-                    for (int y = -1; y <= 1; y++) {
-                        int pixel = imagem.at<Vec3b>(i + x, j + y)[canal];
-                        gx += Gx[x + 1][y + 1] * pixel;
-                        gy += Gy[x + 1][y + 1] * pixel;
-                    }
-                }
-
-                float gradiente = sqrt(gx * gx + gy * gy);
-                imagemFiltrada.at<Vec3f>(i, j)[canal] = gradiente;
-            }
+    for (int i = 0; i < altura; i++) {
+        for (int j = 0; j < largura; j++) {
+            imagemTransformada.at<float>(i, j) = c * log(1 + imagem.at<uchar>(i, j));
         }
     }
 
-    double minVal, maxVal;
-    minMaxLoc(imagemFiltrada, &minVal, &maxVal);
-    imagemFiltrada.convertTo(imagemFiltrada, CV_8UC(canais), 255.0 / maxVal);
+    imagemTransformada.convertTo(imagemTransformada, CV_8U, 1.0, 0.0);
 }
 
 void processarDiretorio(const char* input_dir, const char* output_dir, std::vector<double>& tempos_execucao) {
@@ -52,18 +36,18 @@ void processarDiretorio(const char* input_dir, const char* output_dir, std::vect
                 char caminho_imagem[1024];
                 snprintf(caminho_imagem, sizeof(caminho_imagem), "%s/%s", input_dir, ent->d_name);
 
-                Mat imagem = imread(caminho_imagem, IMREAD_COLOR);
+                Mat imagem = imread(caminho_imagem, IMREAD_GRAYSCALE);
                 if (!imagem.empty()) {
-                    Mat imagemFiltrada;
+                    Mat imagemTransformada;
                     clock_t start_time = clock();
-                    filtro_sobel(imagem, imagemFiltrada);
+                    escalaLogaritma(imagem, imagemTransformada);
                     clock_t end_time = clock();
                     double elapsed_time = (double)(end_time - start_time) * 1000.0 / CLOCKS_PER_SEC;
                     tempos_execucao.push_back(elapsed_time);
 
-                    char caminho_imagem_filtrada[1024];
-                    snprintf(caminho_imagem_filtrada, sizeof(caminho_imagem_filtrada), "%s/%s", output_dir, ent->d_name);
-                    imwrite(caminho_imagem_filtrada, imagemFiltrada);
+                    char caminho_imagem_transformada[1024];
+                    snprintf(caminho_imagem_transformada, sizeof(caminho_imagem_transformada), "%s/%s", output_dir, ent->d_name);
+                    imwrite(caminho_imagem_transformada, imagemTransformada);
 
                     printf("Tempo de processamento de %s: %.4f ms\n", ent->d_name, elapsed_time);
                 } else {
@@ -102,11 +86,11 @@ void multiplasExecucoes(const char* input_dir, const char* output_dir, int execu
 }
 
 int main() {
+
     const char* input_dir = "/mnt/c/Users/Cliente/Downloads/base_dados/Imagens_Selecionadas";
-    const char* output_dir = "/mnt/c/Users/Cliente/Downloads/base_dados/Saida_C_Sobel";
-    
+    const char* output_dir = "/mnt/c/Users/Cliente/Downloads/base_dados/Saida_C_Logaritmo";
+
     multiplasExecucoes(input_dir, output_dir, 1);
 
     return 0;
 }
-
