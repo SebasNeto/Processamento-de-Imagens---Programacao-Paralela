@@ -9,6 +9,8 @@
 #include <algorithm>
 #include <numeric>
 
+//g++ dente_de_serra.c -o testeSerra `pkg-config --cflags --libs opencv4`
+
 using namespace cv;
 
 void filtro_k_vizinhos_proximos(Mat imagem, Mat& imagemFiltrada, int tamJanela, int k) {
