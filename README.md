@@ -1,4 +1,4 @@
-Este repositório contém códigos e dados coletados durante o desenvolvimento do projeto de iniciação ciêntifica (PIBIC) intitulado como: *Análise comparativa de desempenho entre algoritmos paralelos e tradicionais para processamento de imagen.*
+Este repositório contém códigos e dados coletados durante o desenvolvimento do projeto de iniciação ciêntifica (PIBIC) intitulado como: *Análise comparativa de desempenho entre algoritmos paralelos e tradicionais para processamento de imagens.*
 
 **Um breve resumo sobre o projeto:**
 
