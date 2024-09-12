@@ -7,6 +7,7 @@ Neste projeto, realizamos uma análise comparativa entre algoritmos paralelos e 
 **A linguagem utilizada para aproveitar os recursos da programação paralela foi a Halide, que pode ter sua documentação consultada pelo link abaixo:**
 
 * https://halide-lang.org/
+* https://github.com/halide/Halide
 
 **As linguagens utilizadas para testar as versões tradicionais foram Python e C:**
 
@@ -21,4 +22,8 @@ Neste projeto, realizamos uma análise comparativa entre algoritmos paralelos e 
 3. **Python_Codigos** - contém os códigos desenvolvidos utilizando a linguagem Python.
 4. **Imagens_Selecionadas** - contém as imagens selecionadas para realizar os testes dos algoritmos.
 5. **Metricas** - contém os códigos desenvolvidos utilizando a linguagem Python para observar o ganho de desempenho entre as versões Paralela e Tradicional.
-6. **Docs** - contém o relatório final do projeto, tabelas comparativas contendo ganho de desempenho e dados de tempos coletados utilizados para análise de ganho de desempenho. 
+6. **Docs** - contém o relatório final do projeto, tabelas comparativas contendo ganho de desempenho e dados de tempos coletados utilizados para análise de ganho de desempenho.
+
+**Para clonar o repostirório e utilizar na máquina local utilize o comando abaixo:**
+
+git clone https://github.com/SebasNeto/Processamento-de-Imagens---Programacao-Paralela.git
