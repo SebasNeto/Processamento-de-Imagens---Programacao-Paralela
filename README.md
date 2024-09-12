@@ -12,6 +12,7 @@ Neste projeto, realizamos uma análise comparativa entre algoritmos paralelos e 
 
 * https://www.python.org/
 * https://visualstudio.microsoft.com
+* https://embarcados.com.br/linguagem-c-guia-completo/
 
 **O projeto é dividido em alguns diretórios especificos:**
 
