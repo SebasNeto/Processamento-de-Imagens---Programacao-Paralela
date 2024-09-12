@@ -54,7 +54,7 @@ def multiplasExecucoes(input_dir, output_dir, execucoes=1):
         print("Nenhuma imagem foi processada em nenhuma execução.")
 
 input_dir = '/mnt/c/Users/Cliente/Downloads/base_dados/Imagens_Selecionadas'
-output_dir = '/mnt/c/Users/Cliente/Downloads/base_dados/Saida_Python_Logaritmo'
+output_dir = '/mnt/c/Users/Cliente/Downloads/base_dados/teste'
 
 # Chama a função que executa o processamento múltiplas vezes
 multiplasExecucoes(input_dir, output_dir)

@@ -85,7 +85,7 @@ float processImage(const std::string& inputPath, const std::string& outputPath) 
 int main(int argc, char** argv) {
 
     std::string inputDir = "/mnt/c/Users/Cliente/Downloads/base_dados/Imagens_Selecionadas";
-    std::string outputDir = "/mnt/c/Users/Cliente/Downloads/base_dados/Saida_Halide_Filtro_Mediana";
+    std::string outputDir = "/mnt/c/Users/Cliente/Downloads/base_dados/teste";
 
     std::vector<float> mediasGerais;
 

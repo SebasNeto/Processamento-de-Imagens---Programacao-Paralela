@@ -19,4 +19,4 @@ Neste projeto, realizamos uma análise comparativa entre algoritmos paralelos e 
 2. **Halide_Codigos** - contém os códigos desenvolvidos utilizando a linguagem Halide.
 3. **Python_Codigos** - contém os códigos desenvolvidos utilizando a linguagem Python.
 4. **Imagens_Selecionadas** - contém as imagens selecionadas para realizar os testes dos algoritmos.
-5. **Metricas** - contém os códigos desenvolvidos utilizando a linguagem Python para observar o ganho de desempenho entre as versão Paralela e Tradicional.
+5. **Metricas** - contém os códigos desenvolvidos utilizando a linguagem Python para observar o ganho de desempenho entre as versões Paralela e Tradicional.

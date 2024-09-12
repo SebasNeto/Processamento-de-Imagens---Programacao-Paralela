@@ -66,7 +66,7 @@ def multiplasExecucoes(input_dir, output_dir, tam_janela=3, T=60, execucoes=1):
         print("Nenhuma imagem foi processada em nenhuma execução.")
 
 input_dir = '/mnt/c/Users/Cliente/Downloads/base_dados/Imagens_Selecionadas'
-output_dir = '/mnt/c/Users/Cliente/Downloads/base_dados/Saida_Python_Filtro_Media'
+output_dir = '/mnt/c/Users/Cliente/Downloads/base_dados/teste'
 
 # Chama a função que executa o processamento múltiplas vezes
 multiplasExecucoes(input_dir, output_dir, tam_janela=3, T=60, execucoes=1)
