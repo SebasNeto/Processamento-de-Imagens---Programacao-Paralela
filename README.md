@@ -26,4 +26,4 @@ Neste projeto, realizamos uma análise comparativa entre algoritmos paralelos e 
 
 **Para clonar o repostirório e utilizar na máquina local utilize o comando abaixo:**
 
-git clone https://github.com/SebasNeto/Processamento-de-Imagens---Programacao-Paralela.git
+* git clone https://github.com/SebasNeto/Processamento-de-Imagens---Programacao-Paralela.git
