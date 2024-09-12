@@ -81,7 +81,7 @@ int main(int argc, char** argv) {
     std::vector<float> mediasGerais;
 
     // Pré-aquecimento
-    for (int i = 0; i < 1; i++) {
+    for (int i = 0; i < 0; i++) {
         for (const auto& entry : fs::directory_iterator(inputDir)) {
             std::string inputPath = entry.path().string();
             std::string outputPath = outputDir + "\\" + entry.path().filename().string();
@@ -102,7 +102,7 @@ int main(int argc, char** argv) {
         }
 
         if (!medias.empty()) {
-            medias.erase(medias.begin()); // Remove a primeira medição
+            medias.erase(medias.begin()); // delet a primeira medição
         }
 
         float mediaExecucao = std::accumulate(medias.begin(), medias.end(), 0.0f) / medias.size();
