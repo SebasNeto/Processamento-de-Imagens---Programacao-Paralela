@@ -20,3 +20,4 @@ Neste projeto, realizamos uma análise comparativa entre algoritmos paralelos e 
 3. **Python_Codigos** - contém os códigos desenvolvidos utilizando a linguagem Python.
 4. **Imagens_Selecionadas** - contém as imagens selecionadas para realizar os testes dos algoritmos.
 5. **Metricas** - contém os códigos desenvolvidos utilizando a linguagem Python para observar o ganho de desempenho entre as versões Paralela e Tradicional.
+6. 5. **Docs** - contém o relatório final do projeto.
