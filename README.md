@@ -9,6 +9,10 @@ Neste projeto, realizamos uma análise comparativa entre algoritmos paralelos e 
 * https://halide-lang.org/
 * https://github.com/halide/Halide
 
+**O link abaixo contém a documentação da linguagem C++ que serve de suporte para desenvolver códigos em Halide:**
+
+* https://learn.microsoft.com/pt-br/cpp/cpp/?view=msvc-170
+
 **As linguagens utilizadas para testar as versões tradicionais foram Python e C:**
 
 * https://www.python.org/
